@@ -12,7 +12,7 @@ app.use(express.static(__dirname + '/public'));
 // app.set('view engine', 'ejs');
 
 app.get('/fetch_matches', function(request, response) {
-	child_process.exec('python' + __dirname + '/aggregation/get_latest_game.py', function (error, stdout, stderr) {
+	child_process.exec('python ' + __dirname + '/aggregation/get_latest_game.py', function (error, stdout, stderr) {
 		console.log("stdout: " + stdout)
 		console.log("stderr: " + stderr)
 		// Could do something here

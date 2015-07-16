@@ -1,7 +1,11 @@
 var express = require('express');
 var app = express();
 var child_process = require('child_process');
-
+child_process.exec('pip install -r ' + __dirname + "/requirements.txt",  function (error, stdout, stderr) {
+		console.log("stdout: " + stdout)
+		console.log("stderr: " + stderr)
+		// Could do something here
+	});
 
 app.set('port', (process.env.PORT || 5000));
 

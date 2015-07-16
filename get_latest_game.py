@@ -59,5 +59,5 @@ if __name__ == "__main__":
   recent_game_histories = download_matches(w, max_matches=calls_per_10-1, logger=logger)
   insert_matches(collection, recent_game_histories)
 
-
+  print recent_game_histories
 client.close()

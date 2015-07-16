@@ -1,0 +1,7 @@
+Dependencies:
+MongoDB
+
+Python:
+	pymongo 				# python wrapper for mongodb
+	riotwatcher			# python wrapper for LoL API
+	

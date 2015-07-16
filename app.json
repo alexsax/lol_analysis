@@ -1,0 +1,6 @@
+{
+  "name": "LoL Data Collector",
+  "description": "GET requests to different pages will trigger collection",
+  "repository": "None, yet",
+  "keywords": ["League of Legends"]
+}

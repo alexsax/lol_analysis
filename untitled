@@ -1,0 +1,4 @@
+# Instantiate connection to DB
+client = MongoClient()
+db = client.lol
+collection = db.match_data

@@ -30,6 +30,12 @@ def download_matches(w, max_matches, logger):
   # First we need to retreive the match ID's, and then we get the matches one by one
   recent_games = w.get_recent_games(summoner_id)["games"]
   game_ids = [game["gameId"] for game in recent_games][:max_matches] # only want the last 9 since we're call-restricted
+  game_to_participant = {}
+  for game in recent_games:
+    game_to_participant[game["gameId"]] = {
+        "championId": game["championId"],
+        "teamId": game["teamId"]
+    }
   histories = []
   for game_id in game_ids:
     for attempt in range(max_download_attempts):
@@ -38,6 +44,7 @@ def download_matches(w, max_matches, logger):
       except (error_429, error_500, error_503) as e:      
         match_download_failed(game_id, attempt, error, logger)
         time.sleep(1)
+      next_game['playerTeamAndChampion'] = game_to_participant[game_id]
       histories.append(next_game)
       break
   return histories
@@ -59,5 +66,4 @@ if __name__ == "__main__":
   recent_game_histories = download_matches(w, max_matches=calls_per_10-1, logger=logger)
   insert_matches(collection, recent_game_histories)
 
-  print recent_game_histories
 client.close()

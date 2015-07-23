@@ -40,6 +40,7 @@ def download_matches(w, max_matches, logger):
   for game_id in game_ids:
     for attempt in range(max_download_attempts):
       try:
+        print game_id
         next_game = w.get_match(game_id, include_timeline=True)
       except (error_429, error_500, error_503) as e:      
         match_download_failed(game_id, attempt, error, logger)

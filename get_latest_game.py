@@ -45,6 +45,7 @@ def download_matches(w, max_matches, logger):
       except Exception as error:      
         match_download_failed(game_id, attempt, error, logger)
         time.sleep(1)
+        continue
 
       next_game['playerTeamAndChampion'] = game_to_participant[game_id]
       histories.append(next_game)

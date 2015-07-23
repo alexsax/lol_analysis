@@ -42,12 +42,10 @@ def download_matches(w, max_matches, logger):
       try:
         print game_id
         next_game = w.get_match(game_id, include_timeline=True)
-      except (error_429, error_500, error_503) as error:      
+      except Exception as error:      
         match_download_failed(game_id, attempt, error, logger)
         time.sleep(1)
-      except (error_404) as error:      
-        print "Failed to download match (404): ", game_id
-        time.sleep(1)
+
       next_game['playerTeamAndChampion'] = game_to_participant[game_id]
       histories.append(next_game)
       break

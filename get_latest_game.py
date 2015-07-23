@@ -5,7 +5,7 @@ max_download_attempts = 10
 from pymongo import MongoClient
 from pymongo.errors import BulkWriteError, DuplicateKeyError
 from riotwatcher import RiotWatcher
-from riotwatcher import error_429, error_500, error_503
+from riotwatcher import error_429, error_500, error_503, error_404
 import time
 import logging
 import json
@@ -43,6 +43,9 @@ def download_matches(w, max_matches, logger):
         next_game = w.get_match(game_id, include_timeline=True)
       except (error_429, error_500, error_503) as e:      
         match_download_failed(game_id, attempt, error, logger)
+        time.sleep(1)
+      except (error_404) as e:      
+        print "Failed to download match (404): ", game_id
         time.sleep(1)
       next_game['playerTeamAndChampion'] = game_to_participant[game_id]
       histories.append(next_game)

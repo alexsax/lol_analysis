@@ -1,0 +1,223 @@
+# Beginning format
+game:
+	_id
+	queueType
+	platformId
+	region
+	mapId
+	matchCreation: long # time match was created
+	matchDuration:
+	matchId
+	matchMode:
+	matchType:
+	matchVersion
+	season:
+	participantIdentities: [
+		participantID: int
+	]
+	teams: [
+		firstDragon: bool
+		firstBaron: bool
+		firstInhibitor: bool
+		baronKills: int
+		winner: bool
+		firstTower: bool
+		firstBlood: bool
+		teamId: int
+		dragonKills: int
+		vilemawKills: int
+		inhibitorKills: int
+		towerKills: int
+		dominionVictoryScore: int
+	]
+	participants: [
+		spell1Id
+		championId
+		participantId
+		runes
+		masteries
+		spell2Id
+		teamId
+		highestAchievedSeasonTier
+		stats: {
+			totalPlayerScore
+			objectivePlayerScore
+			unrealKills
+			totalScoreRank
+			combatPlayerScore
+			champLevel
+			item0
+			item1
+			item2
+			item3
+			item4
+			item5
+			item6
+			assists
+			deaths
+			firstBloodAssist
+			firstBloodKill
+			kills
+			doubleKills
+			tripleKills
+			quadraKills
+			pentaKills
+			killingSprees
+			largestMultiKill
+			largestKillingSpree
+			largestCriticalStrike
+			physicalDamageDealtToChampions
+			physicalDamageDealt
+			magicDamageDealtToChampions
+			magicDamageDealt
+			trueDamageDealtToChampions
+			trueDamageDealt
+			totalDamageDealtToChampions
+			totalDamageDealt
+			totalUnitsHealed
+			totalHeal
+			totalTimeCrowdControlDealt
+			physicalDamageTaken
+			magicDamageTaken
+			trueDamageTaken
+			totalDamageTaken
+			neutralMinionsKilled
+			neutralMinionsKilledTeamJungle
+			neutralMinionsKilledEnemyJungle
+			minionsKilled
+			towerKills
+			firstInhibitorKill
+			visionWardsBoughtInGame
+			sightWardsBoughtInGame
+			wardsPlaced
+			wardsKilled
+			firstTowerAssist
+			firstTowerKill
+			firstInhibitorAssist
+			inhibitorKills
+			winner
+			goldEarned
+			goldSpent
+		}
+	]
+	timeline: {
+		frames: [
+			timestamp: int,
+			participantFrames: [
+
+			]
+		]
+	}	
+# End format
+game:
+	_id:
+	queueType:
+	platformId:
+	region:
+	mapId:
+	matchCreation: long # time match was created
+	matchDuration:
+	matchId:
+	matchMode:
+	matchType:
+	matchVersion:
+	season:
+	participantIdentities: [
+		participantID: int
+	]
+	teams: [
+		firstDragon: bool
+		firstBaron: bool
+		firstInhibitor: bool
+		baronKills: int
+		winner: bool
+		firstTower: bool
+		firstBlood: bool
+		teamId: int
+		dragonKills: int
+		vilemawKills: int
+		inhibitorKills: int
+		towerKills: int
+		dominionVictoryScore: int
+	]
+	participants: [
+		spell1Id: int
+		spell2Id: int
+		highestAchievedSeasonTier: str
+		championId: int
+		participantId: int
+		runes: [
+			runeId: int
+			rank: int
+		]
+		masteries: [
+			masteryId: int
+			rank: int
+		]
+		teamId: int
+		stats: {
+			champLevel:
+			item0:
+			item1:
+			item2:
+			item3:
+			item4:
+			item5:
+			item6:
+			assists:
+			deaths:
+			firstBloodAssist:
+			firstBloodKill:
+			kills:
+			doubleKills:
+			tripleKills:
+			quadraKills:
+			pentaKills:
+			killingSprees:
+			largestMultiKill:
+			largestKillingSpree:
+			largestCriticalStrike:
+			physicalDamageDealtToChampions:
+			physicalDamageDealt:
+			magicDamageDealtToChampions:
+			magicDamageDealt:
+			trueDamageDealtToChampions:
+			trueDamageDealt:
+			totalDamageDealtToChampions:
+			totalDamageDealt:
+			totalUnitsHealed:
+			totalHeal:
+			totalTimeCrowdControlDealt:
+			physicalDamageTaken:
+			magicDamageTaken:
+			trueDamageTaken:
+			totalDamageTaken:
+			neutralMinionsKilled:
+			neutralMinionsKilledTeamJungle:
+			neutralMinionsKilledEnemyJungle:
+			minionsKilled:
+			towerKills:
+			firstInhibitorKill:
+			visionWardsBoughtInGame:
+			sightWardsBoughtInGame:
+			wardsPlaced:
+			wardsKilled:
+			firstTowerAssist:
+			firstTowerKill:
+			firstInhibitorAssist:
+			inhibitorKills:
+			winner:
+			goldEarned:
+			goldSpent:
+		}
+
+		timeline:
+			frames: [
+				timestamp:
+
+			]
+	]
+	eventTimeline: [
+		lots of stuff
+	]
+}	

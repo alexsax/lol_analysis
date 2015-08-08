@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <style>
+      body, html, h2 { margin:0; padding:0; height:100%;}
+      body { font-family:sans-serif; }
+      body * { font-weight:200;}
+      #heatmapContainerWrapper { width:100%; height:100%; position:absolute; background:rgba(0,0,0,.1); }
+      #heatmapContainer { width:100%; height:100%;}
+      #heatmapLegend { background:white; position:absolute; bottom:0; right:0; padding:10px; }
+      h1 { position:absolute; background:white; padding:10px;}
+    </style>
+  </head>
+  <body>
+    <div id="heatmapContainerWrapper">
+      <div id="heatmapContainer" style="width: 512px; height: 512px;">
+      <img src="https://s3-us-west-1.amazonaws.com/riot-api/img/minimap-mh.png">
+      <!-- <img src="http://matchhistory.na.leagueoflegends.com/assets/1.0.5/images/maps/map11.png"> -->
+      </div>
+      <div id="heatmapLegend">
+      </div>
+    </div>
+    <script src="../assets/heatmap.js"></script>
+    <!-- <script src="../data/killocations.js"></script> -->
+    <script src="../data/locations.js"></script>
+    <script>
+      var times = [[0,10], [10,20], [20,30], [30,70]] // In minutes
+      for(var i = 0; i < times.length; i++) { // Turn into number of milliseconds
+        times[i][0] = times[i][0]*60000
+        times[i][1] = times[i][1]*60000
+      }
+      window.onload = function() {
+        var minx =  -570,
+            maxx = 15220,
+            miny = -420,
+            maxy = 14980
+        function mapx(x, width) {
+          return (x-minx)/(maxx - minx)*width
+        }
+        function mapy(y, height) {
+          return height-(y-miny)/(maxy - miny)*height
+        }
+
+        function infountain(point) {
+          var c = 7
+          return ((point['x'] > width - width/c && point['y'] <  height/c) || (point['x']  < width/c && point['y'] > height - height/c))
+        }
+        // helper function
+        function $(id) {
+          return document.getElementById(id);
+        };
+
+        // create a heatmap instance
+        var heatmap = h337.create({
+          container: document.getElementById('heatmapContainer'),
+          maxOpacity: .5,
+          radius: 10,
+          blur: .75,
+          // update the legend whenever there's an extrema change
+          onExtremaChange: function onExtremaChange(data) {
+            //updateLegend(data);
+          }
+        });
+
+        // boundaries for data generation
+        var width = (+window.getComputedStyle($('heatmapContainer')).width.replace(/px/,''));
+        var height = (+window.getComputedStyle($('heatmapContainer')).height.replace(/px/,''));
+        console.log(width)
+        console.log(height)
+
+        // generate 1000 datapoints
+        var generate = function() {
+          var t = [];
+          var time = times.shift()
+          var min_time = time[0],
+              max_time = time[1]
+          for (var i = 0; i < data.length; i++) {
+            if(min_time < data[i]['time'] && data[i]['time'] <= max_time){
+              point = {}
+              point['x'] = mapx(data[i]['x'], width)
+              point['y'] = mapy(data[i]['y'], height)
+              if(infountain(point)) continue; // Don't want people in the fountain
+
+              point['radius'] = 6
+              point['value'] = 1
+              t.push(point)
+            }
+          }
+          var init = +new Date;
+          // set the generated dataset
+          heatmap.setData({
+            min: 0,
+            max: 2,
+            data: t
+          });
+          console.log('took ', (+new Date) - init, 'ms');
+          console.log(times.push([min_time,max_time]))
+        };
+        // initial generate
+        generate();
+        
+        // whenever a user clicks on the ContainerWrapper the data will be regenerated -> new max & min
+        document.getElementById('heatmapContainerWrapper').onclick = function() { generate(); };
+      };
+    </script>
+  </body>
+</html>
